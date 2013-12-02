@@ -35,29 +35,40 @@ Compilation
 make
 ```
 
+TODO: switch over to Ant?
+
 Running
 -------
 
 ```
+make
 make run
 ```
 
-Note: only works on Linux; you'll have to change the native path for other
-systems.
+Note: this will only run the sources under the `build` directory and is not
+associated with `make dist` whatsoever.
 
 Distribution
 ------------
 
-To distribute the release for the competition I used _JarSplice_:
+```
+make
+make dist
+```
+
+This includes required libraries for Windows, Linux, and Mac OSX (both 32- and
+64-bit). If this is undesirable (e.g. you just want to include Linux) you can
+modify the Makefile :)
+
+Distribution has switched from _JarSplice_ to _JarSplicePlus_ because of the
+support for command-line arguments that it provides.
+
+This will create `EvolutionIsTheKey.jar` in the project root. This can then be
+run with:
 
 ```
-www.ninjacave.com/jarsplice
+java -jar EvolutionIsTheKey.jar
 ```
-
-It lets you put all your data, natives, libraries, and classes into one
-executably jar. It's very handy.
-
-I've included it as part of the project for convenience sake.
 
 Some Notes
 ----------
@@ -68,6 +79,10 @@ think some of them are sound related, but I honestly can't remember.
 
 Also, the code is a mess. When you only have 72 hours you don't generally worry
 about making your code look pretty.
+
+Also also, I had **plenty** of trouble with sound, especially since it has
+behaved differently on **every single system I've tested on**. Have fun with
+that.
 
 Just thought I should give you a heads up.
 
@@ -91,7 +106,12 @@ builds here:
 www.lwjgl.org
 ```
 
-I have no idea what license JarSplice is under (`jarsplice-0.40.jar`).
+_JarSplicePlus_, `JarSplicePlus.jar` has it's own license, whose terms are
+written in `JARSPLICEPLUS-LICENSE`. You can find _JarSplicePlus_ here:
+
+```
+https://github.com/lquesada/JarSplicePlus
+```
 
 Programs Used
 -------------
@@ -102,7 +122,8 @@ Programs Used
   * Audacity -- `audacity.sourceforge.net` -- Mostly for generating white noise
   * AS3SFXR -- `www.superflashbros.net/as3sfxr/` -- Used for all other sounds; used over SFXR because Flash is cross-platform and I was developing on Linux
   * GIMP -- `www.gimp.org` -- Used for all the GFX
-  * JarSplice -- `www.ninjacave.com/jarsplice` -- Used for distribution of release
+  * JarSplice -- `www.ninjacave.com/jarsplice` -- Used for original release distribution
+  * JarSplicePlus -- `https://github.com/lquesada/JarSplicePlus` -- Used now instead of JarSplice because it offers command-line support
   
 If you're on Linux some of these programs can be found through your
 distribution's package manager.
