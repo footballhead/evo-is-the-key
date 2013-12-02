@@ -15,7 +15,7 @@ www.ludumdare.com
 ```
 
 Requirements
-============
+------------
 
 To compile you must have a later version of the _Java Development Kit_. You can
 download that from Oracle:
@@ -29,14 +29,14 @@ distribution's package manager. I'm pretty sure it's what I used to compile the
 original release.
 
 Compilation
-===========
+-----------
 
 ```
 make
 ```
 
 Running
-=======
+-------
 
 ```
 make run
@@ -46,7 +46,7 @@ Note: only works on Linux; you'll have to change the native path for other
 systems.
 
 Distribution
-============
+------------
 
 To distribute the release for the competition I used _JarSplice_:
 
@@ -60,7 +60,7 @@ executably jar. It's very handy.
 I've included it as part of the project for convenience sake.
 
 Some Notes
-==========
+----------
 
 This source is **v1**. The released game is **v4**. Therefore, there are several
 fixes incorporated into releases that were not merged back into the source. I
@@ -72,7 +72,7 @@ about making your code look pretty.
 Just thought I should give you a heads up.
 
 License
-=======
+-------
 
 Everything under `src` and `data` I'ved licensed under the _Do What the Fuck You
 Want to Public License_. You can find it in the `LICENSE` file, or from the
@@ -94,7 +94,7 @@ www.lwjgl.org
 I have no idea what license JarSplice is under (`jarsplice-0.40.jar`).
 
 Programs Used
-=============
+-------------
 
   * Java -- `www.java.com` -- The whole thing is coded in Java, because I am a fan of the language
   * Eclipse -- `www.eclipse.org` -- _The_ best Java IDE
