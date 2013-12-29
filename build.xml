@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project name="Evolution is the Key" default="fatjar">
+
+    <target name="compile" description="just compile the Java source code to class files">
+        <mkdir dir="build"/>
+        <javac classpath="lwjgl-2.8.4/jar/lwjgl.jar:lwjgl-2.8.4/jar/lwjgl_util.jar:src"
+               sourcepath="src"
+               srcdir="src"
+               destdir="build"/>
+    </target>
+    
+    <target name="jar" depends="compile" description="turn the source into separate jars">
+        <copy todir="build/data">
+            <fileset dir="data"/>
+        </copy>
+        <jar destfile="build/evo-is-the-key.jar">
+            <fileset dir="build"/>
+            <manifest>
+                <attribute name="Main-Class" value="net.blackforest.ld24.Game"/>
+            </manifest>
+        </jar>
+    </target>
+    
+    <target name="fatjar" depends="jar" description="package everything into one jar for distribution">
+        <java fork="true" jar="JarSplicePlus.jar">
+            <!-- Eww... JarSplicePlus does not play nicely with <arg value="..."/> tags -->
+            <arg line="-i build/evo-is-the-key.jar lwjgl-2.8.4/jar/lwjgl.jar lwjgl-2.8.4/jar/lwjgl_util.jar -n lwjgl-2.8.4/native/linux/liblwjgl.so lwjgl-2.8.4/native/linux/liblwjgl64.so lwjgl-2.8.4/native/windows/lwjgl.dll lwjgl-2.8.4/native/windows/lwjgl64.dll lwjgl-2.8.4/native/macosx/liblwjgl.jnilib -m net.blackforest.ld24.Game -p -Xms256m -Xmx512m -o EvolutionIsTheKey.jar"/>
+        </java>
+    </target>
+    
+    <target name="clean" description="remove jars and compiled sources">
+        <delete dir="build"/>
+        <delete file="EvolutionIsTheKey.jar"/>
+    </target>
+    
+</project>
