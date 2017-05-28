@@ -9,7 +9,7 @@
     <property name="lwjgl.natives.linux" value="${lwjgl.dir}/native/linux/liblwjgl.so ${lwjgl.dir}/native/linux/liblwjgl64.so"/>
 
     <property name="ld24.jar" value="ld24.jar"/>
-    <property name="ld24.main_class" value="net.blackforest.ld24.Game"/>
+    <property name="ld24.main_class" value="com.michaelhitchens.ld24.Game"/>
     <property name="ld24.java_options" value="-Xms256m -Xmx512m"/>
     <property name="ld24.fatjar" value="EvolutionIsTheKey.jar"/>
 
