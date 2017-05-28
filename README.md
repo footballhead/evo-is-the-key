@@ -21,19 +21,23 @@ There are several targets:
 
   * **compile**: run javac on the source files; output is in `build/`
   * **jar** (default): bundle all the built files into `ld24.jar`
-  * **fatjar-windows**: create `EvolutionIsTheKey.jar` with Windows natives, ready to run
-  * **fatjar-macos**: create `EvolutionIsTheKey.jar` with macOS natives, ready to run
-  * **fatjar-linux**: create `EvolutionIsTheKey.jar` with Linux natives, ready to run
+  * **dist**: create the `dist/` directory with platform-independent files for distribution
+  * **fatjar-windows**: create `dist/EvolutionIsTheKey.jar` with Windows natives, ready to run
+  * **fatjar-macos**: create `dist/EvolutionIsTheKey.jar` with macOS natives, ready to run
+  * **fatjar-linux**: create `dist/EvolutionIsTheKey.jar` with Linux natives, ready to run
+  * **dist-zip**: zip the contents of `dist/` into `EvolutionIsTheKey.zip`
   * **clean**: remove all artifacts
 
 ## Running
 
-Build one of the **fatjar-*** targets, then run `java -jar EvolutionIsTheKey.jar`. Depending on your platform, you may be able to
-double-click it to launch.
+Build one of the **fatjar-*** targets, then navigate into `dist/` and run
+`java -jar EvolutionIsTheKey.jar`. Depending on your platform, you may be able
+to double-click `EvolutionIsTheKey.jar` to launch.
 
 ## Distribution
 
-Package the appropriate **fatjar-*** output with the `data/` directory.
+Build a **fatjar-*** target, then build **dist-zip** to create
+`EvolutionIsTheKey.zip`.
 
 ## Some Notes
 

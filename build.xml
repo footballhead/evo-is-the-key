@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <project name="Evolution is the Key" default="jar">
 
+    <!-- VARIABLES -->
+
     <property name="lwjgl.dir" value="lwjgl-2.9.3"/>
     <property name="lwjgl.common_libs" value="${lwjgl.dir}/jar/lwjgl.jar ${lwjgl.dir}/jar/lwjgl_util.jar"/>
 
@@ -8,54 +10,85 @@
     <property name="lwjgl.natives.macos" value="${lwjgl.dir}/native/macosx/liblwjgl.dylib"/>
     <property name="lwjgl.natives.linux" value="${lwjgl.dir}/native/linux/liblwjgl.so ${lwjgl.dir}/native/linux/liblwjgl64.so"/>
 
+    <property name="ld24.dist_dir" value="dist"/>
+    <property name="ld24.dist_zip" value="EvolutionIsTheKey.zip"/>
+    <property name="ld24.build_dir" value="build"/>
+
     <property name="ld24.jar" value="ld24.jar"/>
+    <property name="ld24.fatjar" value="${ld24.dist_dir}/EvolutionIsTheKey.jar"/>
+
     <property name="ld24.main_class" value="com.michaelhitchens.ld24.Game"/>
     <property name="ld24.java_options" value="-Xms256m -Xmx512m"/>
-    <property name="ld24.fatjar" value="EvolutionIsTheKey.jar"/>
+
+    <!-- PLATFORM-INDEPENDENT COMPILE AND PACKAGE -->
 
     <target name="compile" description="just compile the Java source code to class files">
-        <mkdir dir="build"/>
+        <mkdir dir="${ld24.build_dir}"/>
         <javac classpath="${lwjgl.dir}/jar/lwjgl.jar:${lwjgl.dir}/jar/lwjgl_util.jar:src"
                sourcepath="src"
                srcdir="src"
-               destdir="build"/>
+               destdir="${ld24.build_dir}"/>
     </target>
 
     <target name="jar" depends="compile" description="turn the source into separate jars">
         <jar destfile="${ld24.jar}">
-            <fileset dir="build"/>
+            <fileset dir="${ld24.build_dir}"/>
             <manifest>
                 <attribute name="Main-Class" value="${ld24.main_class}"/>
             </manifest>
         </jar>
     </target>
 
+    <target name="dist" description="copy basic distribution files">
+        <mkdir dir="${ld24.dist_dir}/licenses/lwjgl"/>
+
+        <copy todir="${ld24.dist_dir}/data">
+            <fileset dir="data"/>
+        </copy>
+
+        <copy todir="${ld24.dist_dir}/licenses/lwjgl">
+            <fileset dir="${lwjgl.dir}/doc/3rdparty"/>
+        </copy>
+
+        <copy file="${lwjgl.dir}/doc/LICENSE" tofile="${ld24.dist_dir}/licenses/lwjgl/LICENSE"/>
+        <copy file="LICENSE" tofile="${ld24.dist_dir}/licenses/LICENSE"/>
+        <copy file="README.txt" tofile="${ld24.dist_dir}/README.txt"/>
+    </target>
+
+    <target name="dist-zip" depends="dist" description="ZIP up the distribution after fat jar creation">
+        <zip destfile="${ld24.dist_zip}" basedir="${ld24.dist_dir}" />
+    </target>
+
+    <!-- PLATFORM-DEPENDENT PACKAGE -->
     <!-- Eww... JarSplicePlus does not play nicely with <arg value="..."/> tags -->
 
-    <target name="fatjar-windows" depends="jar" description="package everything into one jar for distribution for Windows">
+    <target name="fatjar-windows" depends="jar,dist" description="package everything into one jar for distribution for Windows">
         <java fork="true" jar="JarSplicePlus.jar">
             <arg line="-i ${ld24.jar} ${lwjgl.common_libs} -n ${lwjgl.natives.windows} -m ${ld24.main_class} -p ${ld24.java_options} -o ${ld24.fatjar}"/>
         </java>
     </target>
 
-    <target name="fatjar-mac" depends="jar" description="package everything into one jar for distribution for macOS">
+    <target name="fatjar-mac" depends="jar,dist" description="package everything into one jar for distribution for macOS">
         <java fork="true" jar="JarSplicePlus.jar">
             <!-- Eww... JarSplicePlus does not play nicely with <arg value="..."/> tags -->
             <arg line="-i ${ld24.jar} ${lwjgl.common_libs} -n ${lwjgl.natives.macos} -m ${ld24.main_class} -p ${ld24.java_options} -o ${ld24.fatjar}"/>
         </java>
     </target>
 
-    <target name="fatjar-linux" depends="jar" description="package everything into one jar for distribution for Linux">
+    <target name="fatjar-linux" depends="jar,dist" description="package everything into one jar for distribution for Linux">
         <java fork="true" jar="JarSplicePlus.jar">
             <!-- Eww... JarSplicePlus does not play nicely with <arg value="..."/> tags -->
             <arg line="-i ${ld24.jar} ${lwjgl.common_libs} -n ${lwjgl.natives.linux} -m ${ld24.main_class} -p ${ld24.java_options} -o ${ld24.fatjar}"/>
         </java>
     </target>
 
+    <!-- CLEAN -->
+
     <target name="clean" description="remove jars and compiled sources">
-        <delete dir="build"/>
-        <delete file="${ld24.fatjar}"/>
+        <delete dir="${ld24.build_dir}"/>
+        <delete dir="${ld24.dist_dir}"/>
         <delete file="${ld24.jar}"/>
+        <delete file="${ld24.dist_zip}"/>
     </target>
 
 </project>

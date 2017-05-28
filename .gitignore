@@ -1,4 +1,7 @@
-build
+build/
+dist/
 *~
-EvolutionIsTheKey.jar
+EvolutionIsTheKey.zip
 hs_err_pid*.log
+ld24.jar
+.DS_Store
