@@ -1,77 +1,40 @@
-Evolution is the Key
-====================
+# Evolution is the Key
 
-Source code for my _Ludum Dare_ #24 Jam entry titled _Evolution is the Key_.
-You can check it out here:
+Source code for my _Ludum Dare_ 24 Jam entry _Evolution is the Key_.
+You can check it the entry
+[here](http://www.ludumdare.com/compo/ludum-dare-24/?action=preview&uid=16438)
+or download it
+[here](https://44d-again-again.itch.io/evolution-is-the-key)
 
-```
-http://www.ludumdare.com/compo/ludum-dare-24/?action=preview&uid=16438
-```
+## Requirements
 
-Why not check out _Ludum Dare_ while you're at it?
+  * Java JDK 1.8
+  * Apache ant
 
-```
-www.ludumdare.com
-```
-
-Requirements
-------------
-
-To compile you must have a later version of the _Java Development Kit_. You can
-download that from Oracle:
+## Compilation
 
 ```
-http://www.oracle.com/technetwork/java/javase/downloads/index.html
+ant <target>
 ```
 
-If you're using Linux I'd recommend _OpenJDK_, which you can find through your
-distribution's package manager. I'm pretty sure it's what I used to compile the
-original release.
+There are several targets:
 
-Compilation
------------
+  * compile: run javac on the source files; output is in `build/`
+  * jar (default): bundle all the built files into `ld24.jar`
+  * fatjar-windows: create `EvolutionIsTheKey.jar` with Windows natives, ready to run
+  * fatjar-macos: create `EvolutionIsTheKey.jar` with macOS natives, ready to run
+  * fatjar-linux: create `EvolutionIsTheKey.jar` with Linux natives, ready to run
+  * clean: remove all artifacts
 
-```
-make
-```
+## Running
 
-TODO: switch over to Ant?
+Build one of the fatjar-* targets, then run `java -jar EvolutionIsTheKey.jar`.
 
-Running
--------
+## Distribution
 
-```
-make
-make run
-```
+Package the appropriate fatjar-* output with the `data/` directory.
 
-Note: this will only run the sources under the `build` directory and is not
-associated with `make dist` whatsoever.
-
-Distribution
-------------
-
-```
-make
-make dist
-```
-
-This includes required libraries for Windows, Linux, and Mac OSX (both 32- and
-64-bit). If this is undesirable (e.g. you just want to include Linux) you can
-modify the Makefile :)
-
-Distribution has switched from _JarSplice_ to _JarSplicePlus_ because of the
-support for command-line arguments that it provides.
-
-This will create `EvolutionIsTheKey.jar` in the project root. This can then be
-run with:
-
-```
-java -jar EvolutionIsTheKey.jar
-```
-
-Some Notes
-----------
+## Some Notes
 
 This source is **v1**. The released game is **v4**. Therefore, there are several
 fixes incorporated into releases that were not merged back into the source. I
@@ -84,46 +47,25 @@ Also also, I had **plenty** of trouble with sound, especially since it has
 behaved differently on **every single system I've tested on**. Have fun with
 that.
 
-Just thought I should give you a heads up.
+## Licenses
 
-License
--------
+Everything under `src` and `data` was made by me and is under the MIT license.
 
-Everything under `src` and `data` I'ved licensed under the _Do What the Fuck You
-Want to Public License_. You can find it in the `LICENSE` file, or from the
-WTFPL website:
-
-```
-www.wtfpl.net
-```
-
-The _Leightweight Java Game Library_, found under `lwjgl-2.8.4`, is licensed
-under it's own lisence, found in `lwjgl-2.8.4/doc/LICENSE`; I'm only including
-it for convenience (which I believe the license allows). You can find LWJGL
-builds here:
-
-```
-www.lwjgl.org
-```
+This game uses the _Leightweight Java Game Library_, see
+`lwjgl-2.9.3/doc/LICENSE`; I'm only including it for convenience (which I
+believe the license allows). You can find LWJGL builds
+[here](http://legacy.lwjgl.org):
 
 _JarSplicePlus_, `JarSplicePlus.jar` has it's own license, whose terms are
-written in `JARSPLICEPLUS-LICENSE`. You can find _JarSplicePlus_ here:
+written in `JARSPLICEPLUS-LICENSE`. You can find _JarSplicePlus_
+[here](https://github.com/lquesada/JarSplicePlus):
 
-```
-https://github.com/lquesada/JarSplicePlus
-```
+## Programs Used (if you care)
 
-Programs Used
--------------
-
-  * Java -- `www.java.com` -- The whole thing is coded in Java, because I am a fan of the language
-  * Eclipse -- `www.eclipse.org` -- _The_ best Java IDE
-  * Lightweight Java Game Library -- `www.lwjgl.org` -- _The_ best Java OpenGL + OpenAL solution
-  * Audacity -- `audacity.sourceforge.net` -- Mostly for generating white noise
-  * AS3SFXR -- `www.superflashbros.net/as3sfxr/` -- Used for all other sounds; used over SFXR because Flash is cross-platform and I was developing on Linux
-  * GIMP -- `www.gimp.org` -- Used for all the GFX
-  * JarSplice -- `www.ninjacave.com/jarsplice` -- Used for original release distribution
-  * JarSplicePlus -- `https://github.com/lquesada/JarSplicePlus` -- Used now instead of JarSplice because it offers command-line support
-  
-If you're on Linux some of these programs can be found through your
-distribution's package manager.
+  * Java: The whole thing is coded in Java, because I was a fan of the language
+  * Eclipse: _The_ best Java IDE
+  * Lightweight Java Game Library: _The_ best Java OpenGL + OpenAL solution
+  * Audacity: Mostly for generating white noise
+  * AS3SFXR: Used for all other sounds; used over SFXR because Flash is cross-platform and I was developing on Linux
+  * Gnu Image Manipulation Program: Used for all the GFX
+  * JarSplicePlus: Used now instead of JarSplice because it offers command-line support

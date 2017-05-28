@@ -1,36 +1,61 @@
 <?xml version="1.0"?>
-<project name="Evolution is the Key" default="fatjar">
+<project name="Evolution is the Key" default="jar">
+
+    <property name="lwjgl.dir" value="lwjgl-2.9.3"/>
+    <property name="lwjgl.common_libs" value="${lwjgl.dir}/jar/lwjgl.jar ${lwjgl.dir}/jar/lwjgl_util.jar"/>
+
+    <property name="lwjgl.natives.windows" value="${lwjgl.dir}/native/windows/lwjgl.dll ${lwjgl.dir}/native/windows/lwjgl64.dll"/>
+    <property name="lwjgl.natives.macos" value="${lwjgl.dir}/native/macosx/liblwjgl.dylib"/>
+    <property name="lwjgl.natives.linux" value="${lwjgl.dir}/native/linux/liblwjgl.so ${lwjgl.dir}/native/linux/liblwjgl64.so"/>
+
+    <property name="ld24.jar" value="ld24.jar"/>
+    <property name="ld24.main_class" value="net.blackforest.ld24.Game"/>
+    <property name="ld24.java_options" value="-Xms256m -Xmx512m"/>
+    <property name="ld24.fatjar" value="EvolutionIsTheKey.jar"/>
 
     <target name="compile" description="just compile the Java source code to class files">
         <mkdir dir="build"/>
-        <javac classpath="lwjgl-2.8.4/jar/lwjgl.jar:lwjgl-2.8.4/jar/lwjgl_util.jar:src"
+        <javac classpath="${lwjgl.dir}/jar/lwjgl.jar:${lwjgl.dir}/jar/lwjgl_util.jar:src"
                sourcepath="src"
                srcdir="src"
                destdir="build"/>
     </target>
-    
+
     <target name="jar" depends="compile" description="turn the source into separate jars">
-        <copy todir="build/data">
-            <fileset dir="data"/>
-        </copy>
-        <jar destfile="build/evo-is-the-key.jar">
+        <jar destfile="${ld24.jar}">
             <fileset dir="build"/>
             <manifest>
-                <attribute name="Main-Class" value="net.blackforest.ld24.Game"/>
+                <attribute name="Main-Class" value="${ld24.main_class}"/>
             </manifest>
         </jar>
     </target>
-    
-    <target name="fatjar" depends="jar" description="package everything into one jar for distribution">
+
+    <!-- Eww... JarSplicePlus does not play nicely with <arg value="..."/> tags -->
+
+    <target name="fatjar-windows" depends="jar" description="package everything into one jar for distribution for Windows">
         <java fork="true" jar="JarSplicePlus.jar">
-            <!-- Eww... JarSplicePlus does not play nicely with <arg value="..."/> tags -->
-            <arg line="-i build/evo-is-the-key.jar lwjgl-2.8.4/jar/lwjgl.jar lwjgl-2.8.4/jar/lwjgl_util.jar -n lwjgl-2.8.4/native/linux/liblwjgl.so lwjgl-2.8.4/native/linux/liblwjgl64.so lwjgl-2.8.4/native/windows/lwjgl.dll lwjgl-2.8.4/native/windows/lwjgl64.dll lwjgl-2.8.4/native/macosx/liblwjgl.jnilib -m net.blackforest.ld24.Game -p -Xms256m -Xmx512m -o EvolutionIsTheKey.jar"/>
+            <arg line="-i ${ld24.jar} ${lwjgl.common_libs} -n ${lwjgl.natives.windows} -m ${ld24.main_class} -p ${ld24.java_options} -o ${ld24.fatjar}"/>
         </java>
     </target>
-    
+
+    <target name="fatjar-mac" depends="jar" description="package everything into one jar for distribution for macOS">
+        <java fork="true" jar="JarSplicePlus.jar">
+            <!-- Eww... JarSplicePlus does not play nicely with <arg value="..."/> tags -->
+            <arg line="-i ${ld24.jar} ${lwjgl.common_libs} -n ${lwjgl.natives.macos} -m ${ld24.main_class} -p ${ld24.java_options} -o ${ld24.fatjar}"/>
+        </java>
+    </target>
+
+    <target name="fatjar-linux" depends="jar" description="package everything into one jar for distribution for Linux">
+        <java fork="true" jar="JarSplicePlus.jar">
+            <!-- Eww... JarSplicePlus does not play nicely with <arg value="..."/> tags -->
+            <arg line="-i ${ld24.jar} ${lwjgl.common_libs} -n ${lwjgl.natives.linux} -m ${ld24.main_class} -p ${ld24.java_options} -o ${ld24.fatjar}"/>
+        </java>
+    </target>
+
     <target name="clean" description="remove jars and compiled sources">
         <delete dir="build"/>
-        <delete file="EvolutionIsTheKey.jar"/>
+        <delete file="${ld24.fatjar}"/>
+        <delete file="${ld24.jar}"/>
     </target>
-    
+
 </project>
