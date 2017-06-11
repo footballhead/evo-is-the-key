@@ -2,6 +2,9 @@ build/
 dist/
 *~
 EvolutionIsTheKey.zip
+EvolutionIsTheKey-Win.zip
+EvolutionIsTheKey-Mac.zip
+EvolutionIsTheKey-Lnx.zip
 hs_err_pid*.log
 ld24.jar
 .DS_Store
