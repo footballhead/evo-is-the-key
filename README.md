@@ -23,7 +23,7 @@ There are several targets:
   * **jar** (default): bundle all the built files into `ld24.jar`
   * **dist**: create the `dist/` directory with platform-independent files for distribution
   * **fatjar-windows**: create `dist/EvolutionIsTheKey.jar` with Windows natives, ready to run
-  * **fatjar-macos**: create `dist/EvolutionIsTheKey.jar` with macOS natives, ready to run
+  * **fatjar-mac**: create `dist/EvolutionIsTheKey.jar` with macOS natives, ready to run
   * **fatjar-linux**: create `dist/EvolutionIsTheKey.jar` with Linux natives, ready to run
   * **dist-zip**: zip the contents of `dist/` into `EvolutionIsTheKey.zip`
   * **clean**: remove all artifacts
