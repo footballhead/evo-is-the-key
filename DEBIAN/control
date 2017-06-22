@@ -1,0 +1,12 @@
+Package: evolution-is-the-key
+Version: 1.0.0
+Section: games
+Priority: optional
+Architecture: amd64
+Depends: default-jre
+Homepage: https://44d-again-again.itch.io/evolution-is-the-key
+Replaces: evolution-is-the-key (<= 1.0.0)
+Maintainer: Michael Hitchens <mdhitchens@gmail.com>
+Description: Evolve to escape the ever shifting maze around you! 
+ Made for Ludum Dare 24
+

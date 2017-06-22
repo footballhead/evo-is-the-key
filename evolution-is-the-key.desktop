@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Evolution is the Key
+Comment=Evolution is the Key
+Exec=evolution-is-the-key
+Icon=/usr/share/evolution-is-the-key/icon.png
+Terminal=false
+Type=Application
+Categories=Games;

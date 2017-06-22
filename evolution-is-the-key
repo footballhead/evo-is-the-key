@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Asset loading depends on the working directory, so make it right
+cd /usr/share/evolution-is-the-key
+
+# Actually run the game
+java -jar /usr/share/evolution-is-the-key/game.jar
